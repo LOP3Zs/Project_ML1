@@ -1,0 +1,16 @@
+<body>
+    <form action="{{ url_for('predict')}}" method="post">
+        <section>
+        <div>
+            <label><i>HINT: Plasma glucose concentration </i></label>
+            <input type="number" name="Glucose" placeholder="Glucose Level" required>
+            <label><i>HINT: Plasma glucose concentration </i></label>
+        </div>
+        <center><button type="submit">Predict</button></center>
+        <div class = "result">
+            <h2>Result</h2>
+            <p>{{result}}</p>
+        </div>
+        </section>
+    </form>   
+</body>

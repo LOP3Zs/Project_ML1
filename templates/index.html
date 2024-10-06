@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Obesity prediction</title>
+<style>
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  flex-direction: column; /* Important for vertical stacking */
+  background-color: white;
+}
+
+.main-content { /* Added container for main content */
+    flex: 1; /* This is crucial for the footer to stick to the bottom */
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  margin: 20px auto;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 20px; /* Added spacing between input fields */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555; /* Slightly darker label color */
+}
+
+input[type="number"],
+input[type="text"], /* Include text inputs */
+select {
+  width: calc(100% - 20px); /* Improved width calculation */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+button {
+  background-color: #4CAF50; /* Changed to a standard green */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* More space above the button */
+  display: block; /* Makes it take up full width of its container */
+  width: 100%; /*Ensures the button stretches to full width */
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+
+.result {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #666;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Obesity Prediction</h1>
+  <p><em>Note: This model is 84% accurate. Results are for informational purposes only and should not be considered medical advice. Consult a healthcare professional for personalized guidance.</em></p>
+  <form action="{{ url_for('predict') }}" method="post">
+    <label for="Age">Age:</label>
+    <input type="number" id="Age" name="Age" step="1" required>
+
+    <label for="vegetables">Frequency of Consuming Vegetables:</label>
+    <select id="vegetables" name="Frequency_of_Consuming_Vegetables" required>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Always</option>
+    </select>
+
+    <label>Number of Main Meals Daily:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="Number_of_Main_Meals_Daily" value="1" required> 1-2</label>
+        <label><input type="radio" name="Number_of_Main_Meals_Daily" value="2"> 3</label>
+        <label><input type="radio" name="Number_of_Main_Meals_Daily" value="3"> 3+</label>
+    </div>
+
+    <label>Physical Exercise (Days per week):</label>
+    <select id="exercise" name="Physical_Excercise" required>
+        <option value="1">None</option>
+        <option value="2">1-2 days</option>
+        <option value="3">3-4 days</option>
+        <option value="4">5-6 days</option>
+        <option value="5">6+ days</option>
+    </select>
+
+    <label>Type of Transportation:</label>
+    <select id="transport" name="Type_of_Transportation_Used" required>
+      <option value="1">Automobile</option>
+      <option value="2">Motorbike</option>
+      <option value="3">Bike</option>
+      <option value="4">Public Transportation</option>
+      <option value="5">Walking</option>
+    </select>
+
+    <label>Consumption of Fast Food:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="Consumption_of_Fast_Food" value="1" required> Yes</label>
+        <label><input type="radio" name="Consumption_of_Fast_Food" value="2"> No</label>
+    </div>
+
+    <label>Do you calculate your Calorie Intake?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="Calculation_of_Calorie_Intake" value="1" required> Yes</label>
+        <label><input type="radio" name="Calculation_of_Calorie_Intake" value="2"> No</label>
+    </div>
+
+
+    <button type="submit">Predict</button>
+  </form>
+  <div class="result">
+    <h2>Prediction Result:</h2>
+    <p>{{ result }}</p>
+  </div>
+</div>
+<footer>
+  <p>Developed By Thang so handsome!!</p>
+</footer>
+</body>
+</html>
